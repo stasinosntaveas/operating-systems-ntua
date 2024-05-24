@@ -1,0 +1,21 @@
+#
+# Makefile
+#
+
+CC = gcc
+
+# CAUTION: Always use '-pthread' when compiling POSIX threads-based
+# applications, instead of linking with "-lpthread" directly.
+CFLAGS = -Wall -O2 -pthread
+
+mandel2: mandel-lib.o mandel2.o
+        $(CC) $(CFLAGS) -o mandel2 mandel-lib.o mandel2.o
+
+mandel-lib.o: mandel-lib.h mandel-lib.c
+        $(CC) $(CFLAGS) -c -o mandel-lib.o mandel-lib.c
+
+mandel2.o: mandel-lib.h mandel2.c
+        $(CC) $(CFLAGS) -c -o mandel2.o mandel2.c
+
+clean:
+        rm -f *.s *.o mandel2

@@ -1,0 +1,47 @@
+#
+# Makefile
+#
+
+CC = gcc
+
+# CAUTION: Always use '-pthread' when compiling POSIX threads-based
+# applications, instead of linking with "-lpthread" directly.
+CFLAGS = -Wall -O2 -pthread
+
+all: pthread-test simplesync kgarten mandel
+
+## Pthread test
+pthread-test: pthread-test.o
+        $(CC) $(CFLAGS) -o pthread-test pthread-test.o
+
+pthread-test.o: pthread-test.c
+        $(CC) $(CFLAGS) -c -o pthread-test.o pthread-test.c
+
+## Simple sync
+simplesync: simplesync.o
+        $(CC) $(CFLAGS) -o simplesync simplesync.o
+
+simplesync.o: simplesync.c
+        $(CC) $(CFLAGS) -DSYNC_MUTEX -c -o simplesync.o simplesync.c
+
+
+## Kindergarten
+kgarten: kgarten.o
+        $(CC) $(CFLAGS) -o kgarten kgarten.o
+
+kgarten.o: kgarten.c
+        $(CC) $(CFLAGS) -c -o kgarten.o kgarten.c
+
+
+## Mandel
+mandel: mandel-lib.o mandel.o
+        $(CC) $(CFLAGS) -o mandel mandel-lib.o mandel.o
+
+mandel-lib.o: mandel-lib.h mandel-lib.c
+        $(CC) $(CFLAGS) -c -o mandel-lib.o mandel-lib.c
+
+mandel.o: mandel-lib.h mandel.c
+        $(CC) $(CFLAGS) -c -o mandel.o mandel.c
+
+clean:
+        rm -f *.s *.o pthread-test simplesync kgarten mandel
