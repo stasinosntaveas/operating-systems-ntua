@@ -11,6 +11,8 @@ This repository contains the series of exercises for the Operating Systems class
 
 Additionally, this repository includes the corresponding questions and the reports we authored.
 
+![Mandelbrot Fractal](https://upload.wikimedia.org/wikipedia/commons/2/21/Mandel_zoom_00_mandelbrot_set.jpg)
+
 ## Contributors
 
 - [Stasinos Ntaveas](https://github.com/stasinosntaveas)
